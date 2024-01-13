@@ -9,13 +9,13 @@ const Footer = () => {
                 </div>
             </aside>
             <div className="text-2xl text-center mx-auto grid-flow-col">
-                <a href=""><FaGithub /></a>
-                <a href=""><FaLinkedin /></a>
-                <a href=""><FaFacebookF /></a>
+                <a href="https://github.com/devjunayed"><FaGithub /></a>
+                <a href="https://www.linkedin.com/in/devjunayed/"><FaLinkedin /></a>
+                <a href="https://www.facebook.com/devjunayed/"><FaFacebookF /></a>
 
             </div>
             <div className="w-full flex justify-center  md:justify-end">
-                <p className="">Copyright © 2024 - All right reserved <a href="https://devjunayed.com">Devjunayed</a></p>
+                <p className="">Copyright © {new Date().getFullYear()} - All right reserved <a href="https://devjunayed.com">Devjunayed</a></p>
             </div>
         </footer>
     );
