@@ -3,6 +3,7 @@ import Modal from 'react-modal';
 import { IoIosCloseCircle } from "react-icons/io";
 import { FaArrowRight } from "react-icons/fa";
 import PropTypes from 'prop-types';
+import { Bounce, toast } from "react-toastify";
 
 Modal.setAppElement('#root');
 
@@ -23,6 +24,18 @@ const ModalPopup = ({setIsOpen, modalIsOpen, setValue}) => {
         e.preventDefault();
         setValue(e.target.inputData.value);
         setIsOpen(false);
+
+        toast('Data added!', {
+            position: "top-right",
+            autoClose: 1000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            transition: Bounce,
+            });
     }
 
     useEffect(() => {
@@ -35,7 +48,7 @@ const ModalPopup = ({setIsOpen, modalIsOpen, setValue}) => {
                 isOpen={modalIsOpen}
                 onAfterOpen={afterOpenModal}
                 onRequestClose={closeModal}
-                className="w-1/2 bg-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border-2 outline-none drop-shadow-xl border-gray-200  p-4 rounded-2xl"
+                className=" w-10/12 md:w-1/2 bg-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border-2 outline-none drop-shadow-xl border-gray-200  p-4 rounded-2xl"
             >
 
                 <div className="flex justify-end">
@@ -43,7 +56,7 @@ const ModalPopup = ({setIsOpen, modalIsOpen, setValue}) => {
                 </div>
 
                 <div className="mt-4">
-                    <h2 className="text-3xl text-center">Please Enter Your Data</h2>
+                    <h2 className="text-xl md:text-3xl text-center">Please Enter Your Data</h2>
                 </div>
 
                 <form onSubmit={handleSubmit}>
