@@ -26,7 +26,7 @@ const ModalPopup = ({setIsOpen, modalIsOpen, setValue}) => {
     }
 
     useEffect(() => {
-        setIsOpen(true);
+        setIsOpen(false);
     }, [setIsOpen])
 
     return (
@@ -47,7 +47,7 @@ const ModalPopup = ({setIsOpen, modalIsOpen, setValue}) => {
                 </div>
 
                 <form onSubmit={handleSubmit}>
-                    <textarea name="inputData" className="mt-4 border-2 w-full h-36" ></textarea>
+                    <textarea placeholder="Ex :- Karim, John, Stracy (Separate with comma)" name="inputData" className="p-2 mt-4 border-2 w-full h-36" ></textarea>
                     <div className="flex justify-center mt-4">
                         <button className="btn bg-green-600 text-white">Submit <FaArrowRight /></button>
                     </div>
