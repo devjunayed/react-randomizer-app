@@ -1,19 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Modal from 'react-modal';
 import { IoIosCloseCircle } from "react-icons/io";
 import { FaArrowRight } from "react-icons/fa";
-
+import PropTypes from 'prop-types';
 
 Modal.setAppElement('#root');
 
-const ModalPopup = () => {
+const ModalPopup = ({setIsOpen, modalIsOpen, setValue}) => {
 
     let subtitle;
-    const [modalIsOpen, setIsOpen] = useState(false);
 
-    function openModal() {
-        setIsOpen(true);
-    }
 
     function afterOpenModal() {
         // references are now sync'd and can be accessed.
@@ -23,12 +19,15 @@ const ModalPopup = () => {
     function closeModal() {
         setIsOpen(false);
     }
-
-
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setValue(e.target.inputData.value);
+        setIsOpen(false);
+    }
 
     useEffect(() => {
-        openModal();
-    }, [])
+        setIsOpen(true);
+    }, [setIsOpen])
 
     return (
         <div>
@@ -47,15 +46,21 @@ const ModalPopup = () => {
                     <h2 className="text-3xl text-center">Please Enter Your Data</h2>
                 </div>
 
-                <form>
-                   <textarea className="mt-4 border-2 w-full h-36" ></textarea>
-                  <div className="flex justify-center mt-4">
-                  <button className="btn bg-green-600 text-white">Submit <FaArrowRight /></button>
-                  </div>
+                <form onSubmit={handleSubmit}>
+                    <textarea name="inputData" className="mt-4 border-2 w-full h-36" ></textarea>
+                    <div className="flex justify-center mt-4">
+                        <button className="btn bg-green-600 text-white">Submit <FaArrowRight /></button>
+                    </div>
                 </form>
             </Modal>
         </div>
     );
 };
+
+ModalPopup.propTypes = {
+    modalIsOpen: PropTypes.bool,
+    setIsOpen: PropTypes.bool,
+    setValue: PropTypes.string
+}
 
 export default ModalPopup;
