@@ -2,11 +2,13 @@ import { useState } from "react";
 import ModalPopup from "../components/ModalPopup";
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { MdContentCopy } from "react-icons/md";
+import { element } from "prop-types";
 
 const Home = () => {
     const [modalIsOpen, setIsOpen] = useState(false);
     const [value, setValue] = useState("");
     const [randomValue, setRandomValue] = useState([]);
+    const [isChecked, setIsChecked] = useState(false);
 
     function openModal() {
         setIsOpen(true);
@@ -16,7 +18,6 @@ const Home = () => {
 
     const handleRandomize = () => {
         const randomizeValue = [];
-
         const valueInArray = value.split(",");
         const valueLength = valueInArray.length;
 
@@ -29,6 +30,30 @@ const Home = () => {
         console.log(randomizeValue);
 
         setRandomValue(randomizeValue);
+    }
+
+    const handleCheckboxChange = () => {
+        setIsChecked(!isChecked);
+
+        if (!isChecked) {
+            const valueWithSerial = randomValue.map((currValue, index) => {
+                if (!currValue.includes(`${index + 1}`)) {
+                    return `${index + 1}. ${currValue}`;
+                }
+                return currValue;
+            }
+            );
+            setRandomValue(valueWithSerial);
+        } else {
+            const valueWithOutSerial = randomValue.map((currValue, index) => {
+                if (currValue.includes(`${index + 1}`)) {
+                    return `${currValue.split('. ')[1]}`;
+                }
+                return currValue;
+            }
+            );
+            setRandomValue(valueWithOutSerial);
+        }
     }
 
     return (
@@ -50,7 +75,7 @@ const Home = () => {
                     <div className="flex justify-between">
                         <div className="flex  gap-2 items-center">
                             <label htmlFor="checkbox">Add Serial Number</label>
-                            <input  type="checkbox" id="checkbox" name="" />
+                            <input name="serial" checked={isChecked} onChange={handleCheckboxChange} type="checkbox" id="checkbox" />
                         </div>
                         <div className="flex">
                             <CopyToClipboard text={randomValue}>
