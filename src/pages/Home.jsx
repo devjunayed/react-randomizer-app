@@ -2,7 +2,6 @@ import { useState } from "react";
 import ModalPopup from "../components/ModalPopup";
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { MdContentCopy } from "react-icons/md";
-import { element } from "prop-types";
 
 const Home = () => {
     const [modalIsOpen, setIsOpen] = useState(false);
